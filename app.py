@@ -8,7 +8,7 @@ Flow:
 Run with:  python app.py
 Then open: http://127.0.0.1:5000
 """
-
+import os
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_login import (
     LoginManager,
@@ -347,5 +347,10 @@ def init_db():
 
 if __name__ == "__main__":
     with app.app_context():
-        db.create_all()  # convenient for local dev; creates techiva.db if missing
-    app.run(debug=True)
+        db.create_all()
+
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000)),
+        debug=True
+    )
