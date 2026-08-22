@@ -1,0 +1,36 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" rx="28" fill="#ede9fe"/>
+  <rect x="40" y="45" width="120" height="110" rx="6" fill="#1d2b64"/>
+  <!-- shielded module can -->
+  <rect x="60" y="55" width="55" height="45" rx="4" fill="#64748b"/>
+  <rect x="60" y="55" width="55" height="45" rx="4" fill="none" stroke="#334155" stroke-width="2"/>
+  <!-- wifi waves -->
+  <g stroke="#a78bfa" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M130 60 a20 20 0 0 1 0 30"/>
+    <path d="M137 52 a32 32 0 0 1 0 46"/>
+  </g>
+  <!-- usb port -->
+  <rect x="25" y="90" width="22" height="26" rx="3" fill="#94a3b8"/>
+  <!-- pin headers -->
+  <g fill="#f8fafc">
+    <rect x="48" y="45" width="5" height="9"/>
+    <rect x="60" y="45" width="5" height="9"/>
+    <rect x="72" y="45" width="5" height="9"/>
+    <rect x="84" y="45" width="5" height="9"/>
+    <rect x="96" y="45" width="5" height="9"/>
+    <rect x="108" y="45" width="5" height="9"/>
+    <rect x="120" y="45" width="5" height="9"/>
+    <rect x="132" y="45" width="5" height="9"/>
+    <rect x="144" y="45" width="5" height="9"/>
+    <rect x="48" y="146" width="5" height="9"/>
+    <rect x="60" y="146" width="5" height="9"/>
+    <rect x="72" y="146" width="5" height="9"/>
+    <rect x="84" y="146" width="5" height="9"/>
+    <rect x="96" y="146" width="5" height="9"/>
+    <rect x="108" y="146" width="5" height="9"/>
+    <rect x="120" y="146" width="5" height="9"/>
+    <rect x="132" y="146" width="5" height="9"/>
+    <rect x="144" y="146" width="5" height="9"/>
+  </g>
+  <text x="88" y="130" font-size="10" fill="#c4b5fd" text-anchor="middle" font-family="monospace">ESP32</text>
+</svg>
