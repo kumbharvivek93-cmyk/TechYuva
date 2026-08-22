@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Grade {{ grade }} Path{% endblock %}
+{% block content %}
+<section class="path-header">
+    <h1>Grade {{ grade }} Learning Path</h1>
+    <div class="path-progress-bar">
+        <div class="path-progress-fill" style="width: {{ progress_pct }}%;"></div>
+    </div>
+    <p class="path-progress-label">{{ completed_count }} / {{ total_count }} lessons complete</p>
+
+    <div class="grade-switch">
+        <label for="grade-jump">Jump to another grade:</label>
+        <select id="grade-jump" onchange="window.location.href='/knowledge/' + this.value">
+            {% for g in grades %}
+                <option value="{{ g }}" {% if g == grade %}selected{% endif %}>Grade {{ g }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</section>
+
+<section class="game-path">
+    {% for node in nodes %}
+        {% set topic = node.topic %}
+        <div class="path-row {{ 'path-row-right' if loop.index0 % 2 == 1 else 'path-row-left' }}">
+            {% if node.unlocked or node.completed %}
+                <a href="{{ url_for('lesson', grade=grade, topic_id=topic.id) }}"
+                   class="path-node {{ 'path-node-completed' if node.completed else 'path-node-active' }}">
+                    <img src="{{ url_for('static', filename='images/icons/' + topic.image) }}" alt="{{ topic.title }}">
+                    {% if node.completed %}<span class="path-node-badge">✓</span>{% endif %}
+                </a>
+            {% else %}
+                <div class="path-node path-node-locked">
+                    <span class="lock-icon">🔒</span>
+                </div>
+            {% endif %}
+            <div class="path-node-label">{{ topic.title }}</div>
+        </div>
+    {% endfor %}
+
+    {% if completed_count == total_count and total_count > 0 %}
+        <div class="path-complete-banner">
+            🎉 You finished Grade {{ grade }}! Try another grade from the dropdown above.
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

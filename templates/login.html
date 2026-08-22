@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<section class="auth-card">
+    <h1>Welcome back</h1>
+    <form method="POST" action="{{ url_for('login') }}">
+        <label for="identifier">Username or Email</label>
+        <input type="text" id="identifier" name="identifier" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <p class="auth-switch">New to Techiva? <a href="{{ url_for('register') }}">Create an account</a></p>
+</section>
+{% endblock %}

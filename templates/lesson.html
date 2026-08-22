@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.title }}{% endblock %}
+{% block content %}
+<a href="{{ url_for('knowledge', grade=grade) }}" class="back-link">← Back to path</a>
+
+<section class="lesson-card">
+    <img class="lesson-image" src="{{ url_for('static', filename='images/icons/' + topic.image) }}" alt="{{ topic.title }}">
+    <h1>{{ topic.icon }} {{ topic.title }}</h1>
+
+    <div class="topic-explanation">
+        <h3>Simple Explanation</h3>
+        <p>{{ topic.simple }}</p>
+    </div>
+
+    <details class="topic-technical">
+        <summary>Technical Explanation</summary>
+        <p>{{ topic.technical }}</p>
+    </details>
+
+    <hr class="lesson-divider">
+
+    {% if already_completed and feedback != "incorrect" %}
+        <div class="quiz-result quiz-correct">
+            ✅ Lesson complete! You already earned XP for this one.
+        </div>
+        <a href="{{ url_for('knowledge', grade=grade) }}" class="btn btn-primary">Continue Path</a>
+    {% else %}
+        {% if feedback == "correct" %}
+            <div class="quiz-result quiz-correct">🎉 Correct! +20 XP earned.</div>
+            <a href="{{ url_for('knowledge', grade=grade) }}" class="btn btn-primary">Continue Path</a>
+        {% else %}
+            {% if feedback == "incorrect" %}
+                <div class="quiz-result quiz-incorrect">❌ Not quite — try again!</div>
+            {% endif %}
+            <form method="POST" class="quiz-form">
+                <h3>Quick Check</h3>
+                <p class="quiz-question">{{ topic.quiz.question }}</p>
+                {% for option in topic.quiz.options %}
+                    <label class="quiz-option">
+                        <input type="radio" name="answer" value="{{ loop.index0 }}" required>
+                        {{ option }}
+                    </label>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Check Answer</button>
+            </form>
+        {% endif %}
+    {% endif %}
+</section>
+{% endblock %}

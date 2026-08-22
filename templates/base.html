@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Techiva{% endblock %} — Learn. Build. Explore. Innovate.</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="theme-{{ active_theme }}">
+    <header class="navbar">
+        <a href="{{ url_for('home') }}" class="brand"><span class="brand-mark">⚡</span> Techiva</a>
+        <nav>
+            <a href="{{ url_for('learn') }}">Learn</a>
+            <a href="{{ url_for('sensors') }}">Sensors</a>
+            <a href="{{ url_for('projects') }}">Build Lab</a>
+            {% if current_user.is_authenticated %}
+                {% if current_user.grade %}
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('knowledge', grade=current_user.grade) }}">My Path</a>
+                {% endif %}
+                <a href="{{ url_for('select_grade') }}">Change Grade</a>
+                <span class="stat-pill stat-xp">⭐ {{ current_user.xp }} XP</span>
+                <span class="stat-pill stat-streak">🔥 {{ current_user.streak }}</span>
+                <span class="nav-user">Hi, {{ current_user.username }}</span>
+                <a href="{{ url_for('logout') }}" class="btn-link">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}" class="btn-link">Sign Up</a>
+            {% endif %}
+            <a href="{{ url_for('board_lab') }}" class="nav-board-link">Board Lab</a>
+            <form class="theme-form" action="{{ url_for('set_theme') }}" method="post"><label for="theme-select">Theme</label><select id="theme-select" name="theme" onchange="this.form.submit()">{% for key, theme in themes.items() %}<option value="{{ key }}" {% if key == active_theme %}selected{% endif %}>{{ theme.icon }} {{ theme.name }}</option>{% endfor %}</select></form>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-wrap">
+                    {% for category, message in messages %}
+                        <div class="flash flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <p>Techiva — made for curious young inventors.</p>
+    </footer>
+</body>
+</html>

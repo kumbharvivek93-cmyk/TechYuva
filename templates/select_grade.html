@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Select Your Grade{% endblock %}
+{% block content %}
+<section class="grade-select">
+    <h1>Which grade are you in?</h1>
+    <p>We'll tailor everything you see to your grade level.</p>
+
+    <form method="POST" action="{{ url_for('select_grade') }}" class="grade-grid">
+        {% for g in grades %}
+            <label class="grade-card {% if current_user.grade == g %}grade-card-selected{% endif %}">
+                <input type="radio" name="grade" value="{{ g }}"
+                       {% if current_user.grade == g %}checked{% endif %} required>
+                <span class="grade-number">{{ g }}</span>
+                <span class="grade-label">Standard</span>
+            </label>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary grade-submit">Continue</button>
+    </form>
+</section>
+{% endblock %}

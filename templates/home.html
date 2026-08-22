@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<section class="hero hero-playground">
+    <div class="hero-copy">
+        <p class="eyebrow">⚙️ India’s little inventor club</p>
+        <h1>Learn tech.<br><span>Build your superpower.</span></h1>
+        <p class="subtitle">Short quests, bright rewards and real inventions for curious students in Classes 3 to 10.</p>
+        <div class="hero-actions">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('select_grade') }}" class="btn btn-primary">Go to My Dashboard</a>
+            {% else %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary">Start my adventure <span>→</span></a>
+                <a href="{{ url_for('login') }}" class="btn btn-secondary">I already have an account</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="hero-robot" aria-hidden="true"><div class="robot-antenna">●</div><div class="robot-face"><span>◉</span><span>◉</span><b>⌣</b></div><div class="robot-body">★</div><i class="spark spark-one">✦</i><i class="spark spark-two">✦</i></div>
+</section>
+<section class="mission-strip">
+    <div><span>🧩</span><strong>Learn in tiny quests</strong><small>Easy steps, one win at a time.</small></div>
+    <div><span>🏆</span><strong>Collect XP & streaks</strong><small>See your effort grow every day.</small></div>
+    <div><span>🛠️</span><strong>Make real things</strong><small>Explore sensors, code and robots.</small></div>
+</section>
+<section class="grades-preview">
+    <p class="eyebrow">Choose your adventure</p><h2>Made for Classes 3 to 10</h2>
+    <p>Pick your class and unlock lessons that speak your language.</p>
+    <div class="grade-chip-row">{% for g in range(3, 11) %}<span class="grade-chip">Class {{ g }}</span>{% endfor %}</div>
+</section>
+<section class="board-teaser">
+    <div><p class="eyebrow">New: Board Lab</p><h2>Meet the tiny computers behind big ideas.</h2><p>Discover which development board can power your first light, game, robot or smart-home project.</p><a class="btn btn-secondary" href="{{ url_for('board_lab') }}">Explore development boards</a></div>
+    <div class="board-stack" aria-hidden="true"><span>🔵</span><span>📶</span><span>🍓</span></div>
+</section>
+{% endblock %}

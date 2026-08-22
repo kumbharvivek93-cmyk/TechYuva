@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Board Lab{% endblock %}
+{% block content %}
+<section class="board-lab-hero"><p class="eyebrow">🔬 Techiva Board Lab</p><h1>Pick a tiny computer.<br>Make a big idea.</h1><p>Development boards are little programmable brains. They help your code talk to lights, buttons, sensors and robots.</p><div class="board-safety">🧑‍🏫 Build with a teacher, parent or trusted adult when using wires, batteries or tools.</div></section>
+<section class="board-grid">{% for board in boards %}<article class="board-card"><div class="board-card-top"><span class="board-icon">{{ board.icon }}</span><span class="board-badge">{{ board.badge }}</span></div><h2>{{ board.name }}</h2><p class="board-for">{{ board.best_for }}</p><dl><div><dt>What is it?</dt><dd>{{ board.brain }}</dd></div><div><dt>Superpower</dt><dd>{{ board.superpower }}</dd></div><div><dt>First build</dt><dd>💡 {{ board.first_build }}</dd></div><div><dt>Code with</dt><dd>{{ board.language }}</dd></div></dl><p class="board-safe">⚠ {{ board.safety }}</p></article>{% endfor %}</section>
+{% endblock %}

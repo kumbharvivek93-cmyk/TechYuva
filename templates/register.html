@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block content %}
+<section class="auth-card">
+    <h1>Create your Techiva account</h1>
+    <form method="POST" action="{{ url_for('register') }}">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" value="{{ username or '' }}" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="{{ email or '' }}" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required minlength="6">
+
+        <label for="confirm_password">Confirm Password</label>
+        <input type="password" id="confirm_password" name="confirm_password" required minlength="6">
+
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+    </form>
+    <p class="auth-switch">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+</section>
+{% endblock %}
